@@ -9,6 +9,9 @@ namespace BeerhallEF.Data
         public void Configure(EntityTypeBuilder<Brewer> builder)
         {
             builder.ToTable("Brewer");
+
+            builder.HasKey(b => b.BrewerId);
+
             builder
                 .Property(b => b.Name)
                 .IsRequired(true)
@@ -18,7 +21,7 @@ namespace BeerhallEF.Data
                 .HasMany(b => b.Beers)
                 .WithOne()
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
